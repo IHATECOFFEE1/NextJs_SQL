@@ -15,3 +15,30 @@ model User {
   email String  @unique
   name  String?
 }
+
+model Location {
+  lName  String  @unique
+  address String @unique
+  longitude Float
+  latitude Float
+  events Events[]
+}
+
+model Events {
+  events_ID    Int     @id @default(autoincrement())
+  events_Name  String  @unique
+  events_Time  DateTime @unique
+  at String
+  locations_LName Location @relation(fields: [at], references: [lName])
+  description String
+  comments Comments[]
+}
+
+model Comments {
+  comments_ID Int @id @default(autoincrement())
+  comments String
+  event_ID Int
+  rating Int
+  timestamp DateTime @default(now())
+  events Events @relation(fields: [event_ID], references: [events_ID])
+}
