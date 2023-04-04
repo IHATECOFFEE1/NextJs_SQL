@@ -13,7 +13,11 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
-  name  String?
+  name  String
+  username String @unique
+  password String
+  type String
+  rso String?
 }
 
 model Location {
@@ -27,7 +31,10 @@ model Location {
 model Events {
   events_ID    Int     @id @default(autoincrement())
   events_Name  String  @unique
-  events_Time  DateTime @unique
+  start_Time  DateTime @unique
+  end_Time  DateTime @unique
+  type String
+  rso String?
   at String
   locations_LName Location @relation(fields: [at], references: [lName])
   description String
