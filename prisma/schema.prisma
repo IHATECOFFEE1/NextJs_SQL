@@ -6,14 +6,21 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
-  name  String?
+  name  String
+  username String @unique
+  password String
+  type String
+  rso String?
+  created_At DateTime @default(now())
+  updated_At DateTime @default(now())
+  comments Comments[]
 }
 
 model Location {
@@ -27,7 +34,10 @@ model Location {
 model Events {
   events_ID    Int     @id @default(autoincrement())
   events_Name  String  @unique
-  events_Time  DateTime @unique
+  start_Time  DateTime @unique
+  end_Time  DateTime @unique
+  type String
+  rso String?
   at String
   locations_LName Location @relation(fields: [at], references: [lName])
   description String
@@ -35,6 +45,8 @@ model Events {
 }
 
 model Comments {
+  user_ID Int
+  written_By User @relation(fields: [user_ID], references: [id])
   comments_ID Int @id @default(autoincrement())
   comments String
   event_ID Int
