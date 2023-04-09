@@ -1,10 +1,12 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm} from "react-hook-form";
 
 export default function SignUp() {
-    const { register, handleSubmit, reset, errors } = useForm();
+    const { register, handleSubmit, reset, formState } = useForm();
 
     const onSubmit = async (data) => {
+        console.log("signup", data);
+        console.log(JSON.stringify(data));
         try {
             const response = await fetch("/api/users", {
                 method: "POST",
@@ -29,36 +31,37 @@ export default function SignUp() {
                     type="text"
                     name="name"
                     placeholder="Name"
-                    required
+                    {...register("name", { required: true })}
                 />
                 <input
                     type="text"
                     name="username"
                     placeholder="Username"
-                    required
+                    {...register("username", { required: true })}
                 />
                 <input
                     type="email"
                     name="email"
                     placeholder="Email"
-                    required
+                    {...register("email", { required: true })}
                 />
                 <input
                     type="password"
                     name="password"
                     placeholder="Password"
-                    required
+                    {...register("password", { required: true })}
                 />
                 <input
                     type="text"
                     name="type"
                     placeholder="Type"
-                    required
+                    {...register("type", { required: true })}
                 />
                 <input
                     type="text"
                     name="rso"
                     placeholder="RSO"
+                    {...register("rso", { required: true })}
                 />
                 <button type="submit">Sign Up</button>
             </form>   

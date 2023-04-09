@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 export default async function handle(req, res) {
     
-    const { email, name, username, password, type, rso } = req.query;
+    const { email, name, username, password, type, rso } = req.body;
     // create with prisma
 
     const user = await prisma.user.create({
@@ -12,7 +12,7 @@ export default async function handle(req, res) {
             username: username,
             password: password,
             type: type,
-            ros: rso,
+            rso: rso,
 
         },
     });
