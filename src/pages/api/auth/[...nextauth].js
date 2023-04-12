@@ -8,19 +8,14 @@ const authOptions = {
     providers: [
         CredentialsProvider({
             name: 'Credentials',
-            credentials: { 
-                email: { label: 'Email', type: 'text', placeholder: 'fe@email.com' },
-                password: {  label: 'Password', type: 'password' }
-            },
-
+            credentials: {},
             authorize(credentials, req) {
                 const { email, password } = credentials
-                
                 if (email !== 'fe@email.com' || password !== '123') {
                     throw new Error('Invalid email or password')
                 }
 
-                return {id: '12', name: 'fe', email: 'fe@email.com'}
+                return { id: '12', name: 'fe', email: 'fe@email.com' }
             },
         }),
     ],

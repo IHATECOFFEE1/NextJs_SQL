@@ -6,8 +6,6 @@ import { signIn } from "next-auth/react"
 const inter = Inter({ subsets: ['latin'] })
 
 
-
-
 export default function Home() {
 
   return (

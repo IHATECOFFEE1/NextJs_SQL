@@ -4,7 +4,7 @@ import styles from "./SignIn.module.scss";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 
-const SignIn = () => {
+const SignIn = (props) => {
     const [userInfo, setUserInfo] = useState({ email: '', password: ''});
     const handleSubmit = async (e) => {
 
@@ -23,11 +23,20 @@ const SignIn = () => {
     return <div>
         <form className={styles.signInForm} onSubmit={handleSubmit}>
             <h1>Sign In</h1>
-            <input type="email" placeholder="email" value={userInfo.email} 
-                onChange={({ target }) => setUserInfo( {...userInfo, email: target.value})} />
-            <input type="password" placeholder="Password" value={userInfo.password} 
-                onChange={({ target }) => setUserInfo({ ...userInfo, password: target.value })} />
-            <button type="submit">Sign In</button>
+
+            <input 
+                type="email" placeholder="email" value={userInfo.email} 
+                onChange={({ target }) => 
+                setUserInfo( {...userInfo, email: target.value})}
+            />
+
+            <input 
+                type="password" placeholder="Password" value={userInfo.password} 
+                onChange={({ target }) =>
+                setUserInfo({ ...userInfo, password: target.value })}
+            />
+
+            <button type="submit"> Login </button>
         </form>
 
     </div>;
