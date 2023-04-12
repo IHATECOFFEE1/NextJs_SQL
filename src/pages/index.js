@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
+import { signIn } from "next-auth/react"
+
 
 const inter = Inter({ subsets: ['latin'] })
-
-
 
 
 export default function Home() {
@@ -16,11 +16,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <p>
-        lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        
+      <main>
+        <button onClick={() => {
+          signIn()
+        }}>
+          Login In
+        </button>
 
-      </p>
+        <button>
+          Log out
+        </button>
+      </main>
     </div>
   )
 }

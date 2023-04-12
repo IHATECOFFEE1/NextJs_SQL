@@ -1,0 +1,52 @@
+.signInForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    form {
+        padding: 50px 15px;
+        border: 2px #0059b3;
+        border-radius: 3px;
+    }
+
+    h1 {
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    input {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+            border-color: #0077ff;
+            box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.3);
+        }
+    }
+
+    button[type="submit"] {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.25rem;
+        font-size: 1.2rem;
+        background-color: #0077ff;
+        color: #fff;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #006ae6;
+        }
+
+        &:active {
+            background-color: #0059b3;
+        }
+    }
+}
