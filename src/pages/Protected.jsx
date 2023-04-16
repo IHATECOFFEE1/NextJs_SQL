@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import Router from "next/router";
 import { signOut } from "next-auth/react";
 
+
 const Protected = () => {
     const { status, data } = useSession();
-    
-    
+
     useEffect (() => {
         if (status === "unauthenticated") {
             Router.replace("/auth/SignIn");
@@ -24,7 +24,7 @@ const Protected = () => {
             <p>{data.user.name}</p>
             <p>{data.user.email}</p>
 
-
+            
 
 
             <button onClick={() => Router.replace("/CreateEvent") }>

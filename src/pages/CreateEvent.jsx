@@ -1,9 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./SignUp.module.scss";
+import { useState, useEffect } from 'react';
 
 export default function SignUp() {
     const { register, handleSubmit, reset, formState } = useForm();
+    const [locations, setLocations] = useState([]);
+
+    useEffect(() => {
+        const getLocations = async () => {
+            const response = await fetch('/api/locations');
+            const data = await response.json();
+            setLocations(data);
+        }
+        getLocations();
+    }, []);
 
     const onSubmit = async (data) => {
 
@@ -35,16 +46,16 @@ export default function SignUp() {
                 />
                 <input
                     type="datetime-local"
-                    value="2018-06-12T19:30"
-                    min="2018-06-07T00:00" max="2018-06-14T00:00"
+                    defaultValue={new Date().toISOString().slice(0, 16)}
+                    min="2022-01-01T00:00"
                     name="start_Time"
                     {...register("start_Time", { required: true })}
                     className={styles.signupForm__input}
                 />
                 <input
                     type="datetime-local"
-                    value="2018-06-12T19:30"
-                    min="2018-06-07T00:00" max="2018-06-14T00:00"
+                    defaultValue={new Date().toISOString().slice(0, 16)}
+                    min="2022-01-01T00:00"
                     name="end_Time"
                     {...register("end_Time", { required: true })}
                     className={styles.signupForm__input}
@@ -58,18 +69,25 @@ export default function SignUp() {
                 />
                 <input
                     type="text"
+                    defaultValue={null}
                     name="rso"
                     placeholder="RSO"
-                    {...register("rso", { required: true })}
+                    {...register("rso", { required: false })}
                     className={styles.signupForm__input}
                 />
-                <input
+                <label htmlFor="location">Location:</label>
+                <select
                     type="text"
-                    name="locations_LName"
-                    placeholder="Location"
-                    {...register("locations_LName", { required: true })}
+                    name="at"
+                    {...register("at", { required: true })}
                     className={styles.signupForm__input}
-                />
+                >
+                    {locations.map((location) => (
+                        <option key={location.lName} value={location.lName}>
+                            {location.lName}
+                        </option>
+                    ))}
+                </select>
                 <input
                     type="text"
                     name="description"
