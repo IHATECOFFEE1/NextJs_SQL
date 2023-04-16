@@ -1,5 +1,8 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 const authOptions = {
     session : {
@@ -9,19 +12,56 @@ const authOptions = {
         CredentialsProvider({
             name: 'Credentials',
             credentials: {},
-            authorize(credentials, req) {
+            async authorize(credentials, req) {
                 const { email, password } = credentials
-                if (email !== 'fe@email.com' || password !== '123') {
+                if (!email  || !password) {
+                    throw new Error('Invalid email or password')
+                }
+                
+                const user = await prisma.user.findUnique({
+                    where: {
+                        email: email,
+                    },
+                });
+                
+                if (!user) {
                     throw new Error('Invalid email or password')
                 }
 
-                return { id: '12', name: 'fe', email: 'fe@email.com' }
+                if (user.password !== password) {
+                    throw new Error('Invalid email or password')
+                }
+
+                return { ...user };
             },
         }),
     ],
     pages: {
         signIn: '/auth/SignIn',
     },
+    callbacks: {
+        jwt: ({ token, user }) => {
+            if (user) {
+
+            return {
+                ...token,
+                id: user.id,
+            };
+            }
+            return token;
+        },
+        session: ({ session, token }) => {
+            return {
+                ...session,
+                user: {
+                    ...session.user,
+                    id: token.id,
+                },
+            };
+        },
+    },
+
+
 };
 
 
