@@ -2,9 +2,7 @@ import prisma from "@/lib/prisma";
 
 export default async function handle(req, res) {
     
-
     // create with prisma
-
     if (req.method === 'POST') {
         try {
             const { email, name, username, password, type, rso } = req.body;
@@ -17,7 +15,6 @@ export default async function handle(req, res) {
                     password: password,
                     type: type,
                     rso: rso,
-
                 },
             });
             res.json(user);

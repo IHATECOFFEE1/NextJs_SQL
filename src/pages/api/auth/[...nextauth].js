@@ -42,11 +42,12 @@ const authOptions = {
     callbacks: {
         jwt: ({ token, user }) => {
             if (user) {
-
+            
             return {
                 ...token,
                 type: user.type,
                 id: user.id,
+                rso: user.rso,
             };
             }
             return token;
@@ -58,6 +59,7 @@ const authOptions = {
                     ...session.user,
                     type: token.type,
                     id: token.id,
+                    rso: token.rso,
                 },
             };
         },

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './Events.module.scss';
+import Router from 'next/router';
 
 
 export default function Events() {
@@ -53,6 +54,9 @@ export default function Events() {
 
     return (
         <div className={styles.events}>
+            <button onClick={() => Router.replace("/Protected")}>
+                Hpme Page
+            </button>
             <h1>Events</h1>
             <div className={styles.eventTabs}>
                 <button onClick={() => handleTabClick('private')}>Private Events</button>

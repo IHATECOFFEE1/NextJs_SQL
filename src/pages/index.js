@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { signIn } from "next-auth/react"
+import Router from 'next/router'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,6 +26,10 @@ export default function Home() {
 
         <button>
           Log out
+        </button>
+
+        <button onClick={() => Router.replace("/SignUp")}>
+          Sign Up
         </button>
       </main>
     </div>
