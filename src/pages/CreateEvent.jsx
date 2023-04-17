@@ -35,7 +35,7 @@ export default function SignUp() {
 
     return (
         <div className={styles.signupForm}>
-            <h1 className={styles.signupForm__header} >Sign Up</h1>
+            <h1 className={styles.signupForm__header} >Create Event</h1>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.signupForm__form}>
                 <input
                     type="text"
@@ -96,7 +96,7 @@ export default function SignUp() {
                     className={styles.signupForm__input}
                 />
 
-                <button type="submit" className={styles.signupForm__button}>Sign Up</button>
+                <button type="submit" className={styles.signupForm__button}> Create Event </button>
             </form>
         </div>
     );

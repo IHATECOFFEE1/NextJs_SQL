@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
+import styles from './Events.module.scss';
+
 
 export default function Events() {
     const [privateEvents, setPrivateEvents] = useState([]);
     const [publicEvents, setPublicEvents] = useState([]);
     const [rsoEvents, setRsoEvents] = useState([]);
-    const [activeTab, setActiveTab] = useState('private'); // default to private events tab
+    const [activeTab, setActiveTab] = useState('private'); 
+    
+    // default to private events tab
     function formatDateTime(dateTimeStr) {
         const dateTime = new Date(dateTimeStr);
         const date = dateTime.toLocaleDateString();
@@ -48,18 +52,18 @@ export default function Events() {
     }
 
     return (
-        <div>
+        <div className={styles.events}>
             <h1>Events</h1>
-            <div>
+            <div className={styles.eventTabs}>
                 <button onClick={() => handleTabClick('private')}>Private Events</button>
                 <button onClick={() => handleTabClick('public')}>Public Events</button>
                 <button onClick={() => handleTabClick('rso')}>RSO Events</button>
             </div>
             {eventsToRender.length === 0 && <p>No events to display</p>}
             
-            <div>
+            <div className={styles.eventList}>
                 {eventsToRender.map(event => (
-                    <div key={event.id}>
+                    <div key={event.id} className={styles.event}>
                         <h2>{event.events_Name}</h2>
                         Date: {formatDateTime(event.start_Time)} - {formatDateTime(event.end_Time)}
                         <br />
