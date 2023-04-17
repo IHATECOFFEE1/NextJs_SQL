@@ -13,7 +13,7 @@ const SignIn = (props) => {
         const res = await signIn('credentials', {
             email: userInfo.email,
             password: userInfo.password,
-            redirect: false,
+            callbackUrl: 'http://localhost:3000/Protected'
         })
 
         console.log(res)

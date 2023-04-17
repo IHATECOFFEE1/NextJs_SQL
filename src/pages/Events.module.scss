@@ -1,0 +1,59 @@
+.events {
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .eventTabs {
+        display: flex;
+        margin-top: 1rem;
+
+        button {
+            background-color: #ccc;
+            border: none;
+            border-radius: 4px;
+            color: #444;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background-color: #444;
+                color: #fff;
+            }
+
+            &.active {
+                background-color: #444;
+                color: #fff;
+            }
+        }
+    }
+
+    .eventList {
+        margin-top: 2rem;
+
+        .event {
+            background-color: #eee;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+
+            h2 {
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    .no-events {
+        margin-top: 2rem;
+        text-align: center;
+    }
+}

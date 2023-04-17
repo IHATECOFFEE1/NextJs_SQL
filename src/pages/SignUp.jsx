@@ -6,8 +6,7 @@ export default function SignUp() {
     const { register, handleSubmit, reset, formState } = useForm();
 
     const onSubmit = async (data) => {
-        console.log("signup", data);
-        console.log(JSON.stringify(data));
+
         try {
             const response = await fetch("/api/users", {
                 method: "POST",
