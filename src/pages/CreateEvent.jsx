@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./SignUp.module.scss";
 import { useState, useEffect } from 'react';
-import Router from "next/router";
+
 
 export default function SignUp() {
     const { register, handleSubmit, reset, formState } = useForm();

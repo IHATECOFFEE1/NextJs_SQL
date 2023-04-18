@@ -53,6 +53,12 @@ const Protected = () => {
                     >
                         RSO
                     </button>
+                    <button
+                        className={styles.createRSOButton}
+                        onClick={() => Router.replace("/CreateRSO")}
+                    >
+                        Create RSO
+                    </button>
                 </div>
             </div>
         );

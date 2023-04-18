@@ -41,7 +41,7 @@ const RSO = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ rso: "CS Club" }),
+                body: JSON.stringify({ rso: "UCF Club" }),
             });
             setJoinStatus2("Leave");
         } else {
@@ -82,6 +82,15 @@ const RSO = () => {
         if (status === "unauthenticated") {
             Router.replace("/auth/SignIn");
         }
+        
+        if (data.user.rso === "CS Club") {
+            setJoinStatus1("Leave");
+        } else if (data.user.rso === "UCF Club") {
+            setJoinStatus2("Leave");
+        } else if (data.user.rso === "UCF Club") {
+            setJoinStatus3("Leave");
+        }
+
     }, [status]);
 
     

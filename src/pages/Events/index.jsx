@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import styles from './Events.module.scss';
 import Router from 'next/router';
+import { Link } from 'next/link';
 
 
-export default function Events() {
+
+function Events() {
     const [privateEvents, setPrivateEvents] = useState([]);
     const [publicEvents, setPublicEvents] = useState([]);
     const [rsoEvents, setRsoEvents] = useState([]);
@@ -65,17 +67,25 @@ export default function Events() {
             </div>
             {eventsToRender.length === 0 && <p>No events to display</p>}
             
-            <div className={styles.eventList}>
+            <ul className={styles.eventList}>
                 {eventsToRender.map(event => (
-                    <div key={event.id} className={styles.event}>
-                        <h2>{event.events_Name}</h2>
-                        Date: {formatDateTime(event.start_Time)} - {formatDateTime(event.end_Time)}
-                        <br />
-                        Location: {event.at}
-                        <p>{event.description}</p>
-                    </div>
+                    <li>
+                        
+                        <div key={event.id} className={styles.event}>
+                               
+                            <h2>{event.events_Name}</h2>
+                            
+                            Date: {formatDateTime(event.start_Time)} - {formatDateTime(event.end_Time)}
+                            <br />
+                            Location: {event.at}
+                            <p>{event.description}</p>
+                        </div>
+                        
+                    </li>
                 ))}
-            </div>
+            </ul>
         </div>
     );
 }
+
+export default Events;
