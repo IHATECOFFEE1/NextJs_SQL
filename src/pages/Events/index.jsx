@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import styles from './Events.module.scss';
+import Router from 'next/router';
+import { Link } from 'next/link';
 
 
-export default function Events() {
+
+function Events() {
     const [privateEvents, setPrivateEvents] = useState([]);
     const [publicEvents, setPublicEvents] = useState([]);
     const [rsoEvents, setRsoEvents] = useState([]);
@@ -29,7 +32,7 @@ export default function Events() {
             setPublicEvents(publicData);
 
             // Fetch RSO events
-            const rsoResponse = await fetch('/api/events?type=rso');
+            const rsoResponse = await fetch('/api/events?type=UCF Club');
             const rsoData = await rsoResponse.json();
             setRsoEvents(rsoData);
         }
@@ -53,6 +56,9 @@ export default function Events() {
 
     return (
         <div className={styles.events}>
+            <button onClick={() => Router.replace("/Protected")}>
+                Hpme Page
+            </button>
             <h1>Events</h1>
             <div className={styles.eventTabs}>
                 <button onClick={() => handleTabClick('private')}>Private Events</button>
@@ -61,17 +67,20 @@ export default function Events() {
             </div>
             {eventsToRender.length === 0 && <p>No events to display</p>}
             
-            <div className={styles.eventList}>
+            <ul className={styles.eventList}>
                 {eventsToRender.map(event => (
-                    <div key={event.id} className={styles.event}>
+                    <li key={event.event_ID} className={styles.event} onClick={() => Router.replace("/Events/" + event.events_ID) }> 
                         <h2>{event.events_Name}</h2>
+                        
                         Date: {formatDateTime(event.start_Time)} - {formatDateTime(event.end_Time)}
                         <br />
                         Location: {event.at}
                         <p>{event.description}</p>
-                    </div>
+                    </li>
                 ))}
-            </div>
+            </ul>
         </div>
     );
-}
+};
+
+export default Events;

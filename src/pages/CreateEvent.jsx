@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./SignUp.module.scss";
 import { useState, useEffect } from 'react';
+import Router from "next/router";
+
 
 export default function SignUp() {
     const { register, handleSubmit, reset, formState } = useForm();
@@ -17,7 +19,6 @@ export default function SignUp() {
     }, []);
 
     const onSubmit = async (data) => {
-
         try {
             const response = await fetch("/api/events", {
                 method: "POST",
@@ -26,15 +27,26 @@ export default function SignUp() {
                 },
                 body: JSON.stringify(data),
             });
+            const json = await response.json();
+            console.log(json);
+            if (json.error) {
+                alert(json.error);
+            } else {
+                alert("Event Created");
+            }
+
             reset();
 
         } catch (error) {
-            console.log(error)
+            alert(error);
         }
     };
 
     return (
         <div className={styles.signupForm}>
+            <button onClick={() => Router.replace("/Protected")}>
+                Home Page
+            </button>
             <h1 className={styles.signupForm__header} >Create Event</h1>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.signupForm__form}>
                 <input
