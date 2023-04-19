@@ -83,15 +83,17 @@ const RSO = () => {
             Router.replace("/auth/SignIn");
         }
         
-        if (data.user.rso === "CS Club") {
-            setJoinStatus1("Leave");
-        } else if (data.user.rso === "UCF Club") {
-            setJoinStatus2("Leave");
-        } else if (data.user.rso === "UCF Club") {
-            setJoinStatus3("Leave");
+        if (data) {
+            if (data.user.rso === "CS Club") {
+                setJoinStatus1("Leave");
+            } else if (data.user.rso === "UCF Club") {
+                setJoinStatus2("Leave");
+            } else if (data.user.rso === "UCF Club") {
+                setJoinStatus3("Leave");
+            }
         }
 
-    }, [status]);
+    }, [data]);
 
     
     return (
@@ -100,15 +102,6 @@ const RSO = () => {
             <button onClick={() => Router.replace("/Protected")}>
                 Home Page
             </button>
-            <h2> RSO </h2>
-            <div className={styles.event}>
-                <h2> CS Club </h2>
-                <p> Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi aliquam porro, veritatis deserunt ex quod! Atque maxime ullam facilis dolor sint. Dolorem minus pariatur alias saepe, fugit placeat! Architecto, tempore. </p>
-                
-                <button onClick={() => handleJoin1()}>
-                    {JoinStatus1}
-                </button>
-            </div>
             <div className={styles.event}>
                 <h2> UCF Club </h2>
                 <p> Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi aliquam porro, veritatis deserunt ex quod! Atque maxime ullam facilis dolor sint. Dolorem minus pariatur alias saepe, fugit placeat! Architecto, tempore. </p>

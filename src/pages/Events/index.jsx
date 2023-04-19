@@ -32,7 +32,7 @@ function Events() {
             setPublicEvents(publicData);
 
             // Fetch RSO events
-            const rsoResponse = await fetch('/api/events?type=rso');
+            const rsoResponse = await fetch('/api/events?type=UCF Club');
             const rsoData = await rsoResponse.json();
             setRsoEvents(rsoData);
         }
@@ -69,23 +69,18 @@ function Events() {
             
             <ul className={styles.eventList}>
                 {eventsToRender.map(event => (
-                    <li>
+                    <li key={event.event_ID} className={styles.event} onClick={() => Router.replace("/Events/" + event.events_ID) }> 
+                        <h2>{event.events_Name}</h2>
                         
-                        <div key={event.id} className={styles.event}>
-                               
-                            <h2>{event.events_Name}</h2>
-                            
-                            Date: {formatDateTime(event.start_Time)} - {formatDateTime(event.end_Time)}
-                            <br />
-                            Location: {event.at}
-                            <p>{event.description}</p>
-                        </div>
-                        
+                        Date: {formatDateTime(event.start_Time)} - {formatDateTime(event.end_Time)}
+                        <br />
+                        Location: {event.at}
+                        <p>{event.description}</p>
                     </li>
                 ))}
             </ul>
         </div>
     );
-}
+};
 
 export default Events;

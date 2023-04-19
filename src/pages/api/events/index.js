@@ -6,6 +6,11 @@ export default async function handle(req, res) {
     if (req.method === "POST") {
         const { events_Name, start_Time, end_Time, type, rso, at, description } = req.body;
 
+        if (start_Time >= end_Time) {
+            res.status(400).json({ error: "OverLapping Events" });
+            return;
+        }
+
         const event = await prisma.events.create({
             data: {
                 events_Name: events_Name,

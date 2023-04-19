@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./SignUp.module.scss";
 import { useState, useEffect } from 'react';
+import Router from "next/router";
 
 
 export default function SignUp() {
@@ -18,7 +19,6 @@ export default function SignUp() {
     }, []);
 
     const onSubmit = async (data) => {
-
         try {
             const response = await fetch("/api/events", {
                 method: "POST",
@@ -27,10 +27,18 @@ export default function SignUp() {
                 },
                 body: JSON.stringify(data),
             });
+            const json = await response.json();
+            console.log(json);
+            if (json.error) {
+                alert(json.error);
+            } else {
+                alert("Event Created");
+            }
+
             reset();
 
         } catch (error) {
-            console.log(error)
+            alert(error);
         }
     };
 
